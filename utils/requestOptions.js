@@ -38,8 +38,11 @@ class CreateRequest {
     platformRequest(params) {
         let options = this[generateOptions](params);
         return new Promise((resolve, reject) => {
+            console.log(options)
             request(options, (err, response, body) => {
                 if (!err && response.statusCode === 200) {
+                    console.log(body)
+                    // console.log(JSON.parse(body))
                     try {
                         resolve(JSON.parse(body));
                     } catch (err) {

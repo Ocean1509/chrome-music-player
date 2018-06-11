@@ -1,21 +1,21 @@
-// 酷狗音乐
+// 豆瓣音乐
 const querystring = require('querystring');
 const userAgent = require('../../utils/getUserAgent');
 
-const { kugouHost } = require('../../utils/host');
+const { doubanHost } = require('../../utils/host');
 ;
 const CreateRequest = require('../../utils/requestOptions');
 
 
-const host = kugouHost.host;
-const referer = kugouHost.referer;
+const host = doubanHost.host;
+const referer = doubanHost.referer;
 
 const request = new CreateRequest();
 
 /**
- * 酷狗音乐接口类
+ * 豆瓣音乐接口类
  */
-class KuGouApi extends CreateRequest {
+class DouBanApi extends CreateRequest {
     constructor() {
         super();
         this.host = host;
@@ -44,7 +44,7 @@ class KuGouApi extends CreateRequest {
     searchSong(data) {
         const params = {
             host: this.host,
-            path: 'api/v3/search/song',
+            path: 'j/subject_suggest',
             method: 'GET',
             referer: this.referer,
             data
@@ -53,4 +53,4 @@ class KuGouApi extends CreateRequest {
     }
 }
 
-module.exports = KuGouApi;
+module.exports = DouBanApi;

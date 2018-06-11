@@ -9,8 +9,15 @@ const createNeteaseRequest = require('./platform/NeteaseCloudMusic/api');
 // const { createBaiduRequest, searchDetailFromSongId } = require('./platform/BaiduMusic/api');
 const BaiDuApi = require('./platform/BaiduMusic/api');
 const XiaMiApi = require('./platform/XiamiMusic/api');
+const QqApi = require('./platform/QqMusic/api');
+const KuGouApi = require('./platform/Kugou/api');
+const DouBanApi = require('./platform/DoubanMusic/api');
+
 const bdApi = new BaiDuApi();
 const xmApi = new XiaMiApi();
+const qqApi = new QqApi();
+const kugouApi = new KuGouApi();
+const doubanApi = new DouBanApi();
 // const netsearch = async (ctx, next) => {
 //     let d = { csrf_token: '', limit: 30, type: 1, s: '海阔天空', offset: 0 };
 //     let data;
@@ -65,7 +72,11 @@ const bddetail = async ctx => {
 
 const xiamisearch = async ctx => {
     let d = {
-        key: '告白气球'
+        v: '2.0',
+        app_key: 1,
+        key: '告白气球',
+        limit: 5,
+        r: 'search/songs'
     }
     let data;
     try {
@@ -73,14 +84,76 @@ const xiamisearch = async ctx => {
         ctx.response.body = data;
     } catch (error) {
         console.log(error);
-
     }
 }
 
+const qqsearch = async ctx => {
+    let d = {
+        g_tk: '5381',
+        uin: 0,
+        inCharset: 'utf-8',
+        outCharset: 'utf-8',
+        notice: 0,
+        platform: 'h5',
+        needNewCode: 1,
+        w: '海阔天空',
+        format: 'json',
+        zhidaqu: 1,
+        catZhida: 1,
+        t: 0,
+        flag: 1,
+        ie: 'utf-8',
+        sem: 1,
+        aggr: 0,
+        perpage: 20,
+        n: 5,
+        p:1,
+        reomteplace: 'txt.mqq.all'
+    };
+    let data;
+    try {
+       data = await qqApi.searchSong(d);
+       ctx.response.body = data;       
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const kugousearch = async ctx => {
+    let d = {
+        format: 'json',
+        keyword: '海阔天空',
+        page: 1,
+        pagesize: 5
+    };
+    let data;
+    try {
+        data = await kugouApi.searchSong(d);
+        ctx.response.body = data;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const doubansearch = async ctx => {
+    let d = {
+        q: '海阔天空'
+    }
+    let data;
+    try {
+        data = await doubanApi.searchSong(d)
+        ctx.response.body = data;
+    } catch (error) {
+        console.log(error)
+    }
+}
 app.use(route.get('/baidumusicsearch', bdsearch));
 
 // app.use(route.get('/neteasecloudmusic', netsearch));
 
 app.use(route.get('/baidumusicdetail', bddetail));
 app.use(route.get('/xiamisearch', xiamisearch));
+app.use(route.get('/qqsearch', qqsearch));
+app.use(route.get('/kugousearch', kugousearch));
+app.use(route.get('/doubansearch', doubansearch));
 app.listen(3001);
