@@ -31,7 +31,7 @@ const doubanApi = new DouBanApi();
 // }
 
 const bdsearch = async ctx => {
-    let d = { from: 0, version: 2, third_type: 0, word: '海阔天空', format: 'json', client_type: 0};
+    let d = { from: 0, version: 2, third_type: 0, word: '海阔天空', format: 'json', client_type: 0 };
     let data;
     try {
         data = await bdApi.searchSong(d);
@@ -107,13 +107,13 @@ const qqsearch = async ctx => {
         aggr: 0,
         perpage: 20,
         n: 5,
-        p:1,
+        p: 1,
         reomteplace: 'txt.mqq.all'
     };
     let data;
     try {
-       data = await qqApi.searchSong(d);
-       ctx.response.body = data;       
+        data = await qqApi.searchSong(d);
+        ctx.response.body = data;
     } catch (error) {
         console.log(error)
     }
@@ -147,10 +147,16 @@ const doubansearch = async ctx => {
         console.log(error)
     }
 }
+
+const index = ctx => {
+    console.log('00000000000000')
+    ctx.response.body = { data: 'welcome' }
+}
+
 app.use(route.get('/baidumusicsearch', bdsearch));
 
 // app.use(route.get('/neteasecloudmusic', netsearch));
-
+app.use(route.get('/', index));
 app.use(route.get('/baidumusicdetail', bddetail));
 app.use(route.get('/xiamisearch', xiamisearch));
 app.use(route.get('/qqsearch', qqsearch));
