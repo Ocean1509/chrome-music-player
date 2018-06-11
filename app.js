@@ -18,6 +18,8 @@ const xmApi = new XiaMiApi();
 const qqApi = new QqApi();
 const kugouApi = new KuGouApi();
 const doubanApi = new DouBanApi();
+
+const port = (process.env.PORT || 3000)
 // const netsearch = async (ctx, next) => {
 //     let d = { csrf_token: '', limit: 30, type: 1, s: '海阔天空', offset: 0 };
 //     let data;
@@ -162,4 +164,4 @@ app.use(route.get('/xiamisearch', xiamisearch));
 app.use(route.get('/qqsearch', qqsearch));
 app.use(route.get('/kugousearch', kugousearch));
 app.use(route.get('/doubansearch', doubansearch));
-app.listen(3001);
+app.listen(port);
