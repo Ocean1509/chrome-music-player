@@ -22,21 +22,6 @@ class KuGouApi extends CreateRequest {
         this.referer = referer;
     }
 
-    // /**
-    //  * 根据歌曲id获取歌曲详细信息
-    //  * @param {Object} data 
-    //  */
-    // detailFromSongId(data) {
-    //     const params = {
-    //         host: this.host,
-    //         path: 'data/music/songlink',
-    //         method: 'POST',
-    //         referer: this.referer,
-    //         data
-    //     }
-    //     return super.platformRequest(params)
-    // }
-
     /**
      * 根据关键字搜索歌曲信息
      * @param {Object} data 

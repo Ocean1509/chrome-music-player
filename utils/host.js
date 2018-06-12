@@ -33,4 +33,11 @@ allHosts.doubanHost = {
     host: 'music.douban.com',
     referer: 'https://music.douban.com/'
 }
+
+// 网易云音乐
+allHosts.neteaseCloudHost = {
+    host: 'music.163.com',
+    referer: 'http://music.163.com'
+}
+
 module.exports = allHosts;

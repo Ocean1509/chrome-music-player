@@ -2,38 +2,36 @@
 const Crypto = require('../../utils/crypto');
 const querystring = require('querystring');
 const userAgent = require('../../utils/getUserAgent');
-const request = require('request')
+const CreateRequest = require('../../utils/requestOptions');
+const { neteaseCloudHost } = require('../../utils/host');
 
-const host = 'music.163.com';
+const host = neteaseCloudHost.host;
+const referer = neteaseCloudHost.referer;
 
-const createNeteaseRequest = (path, data, method) => {
-    const cryptoData = Crypto(data);
-    const options = {
-        method,
-        url: `https://${host}/${path}`,
-        headers: {
-            Accept: "*/*",
-            "Accept-Language": "zh-CN,zh;q=0.8,gl;q=0.6,zh-TW;q=0.4",
-            Connection: "keep-alive",
-            "Content-Type": "application/x-www-form-urlencoded",
-            Referer: "http://music.163.com",
-            Host: "music.163.com",
-            "User-Agent": userAgent()
-        },
-        body: querystring.stringify(cryptoData)
+/**
+ * 网易云音乐接口类
+ */
+class NeteaseCloudApi extends CreateRequest {
+    constructor() {
+        super();
+        this.host = host;
+        this.referer = referer;
     }
-    return new Promise((resolve, reject) => {
-        request(options, (err, response, body) => {
-            if (!err && response.statusCode === 200) {
-                try {
-                    resolve(JSON.parse(body));
-                } catch (e) {
-                    reject('===error===');
-                }
-            } else {
-                reject('===error===');
-            }
-        })
-    })
+
+    /**
+     * 根据关键字搜索歌曲信息
+     * @param {Object} data 
+     */
+    searchSong(data) {
+        let d = Crypto(data);
+        const params = {
+            host: this.host,
+            path: 'weapi/search/get',
+            method: 'POST',
+            referer: this.referer,
+            data: d
+        }
+        return super.platformRequest(params)
+    }
 }
-module.exports = createNeteaseRequest;
+module.exports = NeteaseCloudApi;
