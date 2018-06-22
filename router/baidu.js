@@ -10,13 +10,19 @@ baiduRouter
     // 根据关键字搜索歌曲信息
     .get('/search', async ctx => {
         let word = (ctx.query && ctx.query.w) || '';
-        let d = { from: 0, version: 2, third_type: 0, word, format: 'json', client_type: 0 };
+        let d = { from: 0, version: 2, third_type: 1, word, format: 'json', client_type: 0 };
         let data;
         try {
             data = await bdApi.searchSong(d);
-            ctx.response.body = data;
+            let res;
+            if(data.errno) {
+                res = [];
+            } else {
+                res = data.data;
+            }
+            ctx.response.body = res;
         } catch (error) {
-            console.log(error);
+            ctx.response.body = [];
         }
     })
     // 根据歌曲id查询详细信息

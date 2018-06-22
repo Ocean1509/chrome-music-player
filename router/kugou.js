@@ -11,10 +11,10 @@ kugouRouter
     .get('/search', async ctx => {
         let word = (ctx.query && ctx.query.w) || '';
         let d = {
-            format: 'json',
-            keyword: word,
-            page: 1,
-            pagesize: 5
+            MusicTipCount: 5,
+            MVTipCount: 2,
+            albumcount: 2,
+            keyword: word
         };
         let data;
         try {
@@ -23,6 +23,23 @@ kugouRouter
         } catch (error) {
             console.log(error);
         }
+    })
+    .get('/searchDetail', async ctx => {
+        let word = (ctx.query && ctx.query.w) || '';
+        let d = {
+            keyword: word,
+            page: 2,
+            pagesize: 30,
+            userid: -1,
+        }
+        let data;
+        try {
+            data = await kugouApi.searchDetail(d);
+            ctx.response.body = data;
+        } catch (error) {
+            console.log(error);
+        }
+        // keyword=1&page=1&pagesize=30&userid=-1&clientver=&platform=WebFilter&tag=em&filter=2&iscorrection=1&privilege_filter=0
     })
 
 module.exports = kugouRouter;

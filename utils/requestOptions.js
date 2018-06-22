@@ -15,7 +15,7 @@ class CreateRequest {
     [generateOptions]({ host, path, method, referer, data }) {
         const options = {
             method,
-            url: `http://${host}/${path}`,
+            url: `https://${host}/${path}`,
             headers: {
                 "Accept": "*/*",
                 "Accept-Language": "zh-CN,zh;q=0.8,gl;q=0.6,zh-TW;q=0.4",

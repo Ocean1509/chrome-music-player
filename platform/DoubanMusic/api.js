@@ -44,11 +44,12 @@ class DouBanApi extends CreateRequest {
     searchSong(data) {
         const params = {
             host: this.host,
-            path: 'j/subject_suggest',
+            path: 'v2/music/search',
             method: 'GET',
             referer: this.referer,
             data
         }
+        console.log(params)
         return super.platformRequest(params)
     }
 }

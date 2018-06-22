@@ -24,13 +24,14 @@ allHosts.qqHost = {
 
 // 酷狗音乐
 allHosts.kugouHost = {
-    host: 'mobilecdn.kugou.com',
+    'host-searchtip': 'searchtip.kugou.com',
+    'host-search': 'songsearch.kugou.com',
     referer: ''
 }
 
 // 豆瓣音乐
 allHosts.doubanHost = {
-    host: 'music.douban.com',
+    host: 'api.douban.com',
     referer: 'https://music.douban.com/'
 }
 

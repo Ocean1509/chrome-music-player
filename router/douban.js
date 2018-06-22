@@ -11,7 +11,12 @@ doubanRouter
     // 根据关键字搜索歌曲信息
     .get('/search', async ctx => {
         let word = (ctx.query && ctx.query.w) || '';
-        let d = {q: word};
+        let size = (ctx.query && ctx.query.s) || 10;
+        let d = {
+            q: word,
+            count: size
+        };
+        console.log(d)
         let data;
         try {
             data = await doubanApi.searchSong(d);
