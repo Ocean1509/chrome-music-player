@@ -26,6 +26,8 @@ allHosts.qqHost = {
 allHosts.kugouHost = {
     'host-searchtip': 'searchtip.kugou.com',
     'host-search': 'songsearch.kugou.com',
+    'host-special': 'specialsearch.kugou.com',
+    'host-complex': 'so.service.kugou.com',
     referer: ''
 }
 

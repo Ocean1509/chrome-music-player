@@ -7,6 +7,8 @@ const CreateRequest = require('../utils/requestOptions');
 
 const hostSearchtip = kugouHost['host-searchtip'];
 const hostSearch = kugouHost['host-search'];
+const hostSpecial = kugouHost['host-special'];
+const hostComplex = kugouHost['host-complex'];
 const referer = kugouHost.referer;
 
 
@@ -18,6 +20,8 @@ class KuGouApi extends CreateRequest {
         super();
         this.hostSearchtip = hostSearchtip;
         this.hostSearch = hostSearch;
+        this.hostSpecial = hostSpecial;
+        this.hostComplex = hostComplex;
         this.referer = referer;
     }
 
@@ -35,7 +39,12 @@ class KuGouApi extends CreateRequest {
         }
         return super.platformRequest(params)
     }
-    searchDetail(data) {
+
+    /**
+     * 根据关键字搜索单曲
+     * @param {Ojbect} data 
+     */
+    songsearch(data) {
         const params = {
             host: this.hostSearch,
             path: 'song_search_v2',
@@ -45,6 +54,37 @@ class KuGouApi extends CreateRequest {
         }
         return super.platformRequest(params)
     }
+
+    /**
+     * 根据关键字搜索专辑
+     * @param {Object} data 
+     */
+    specialsearch(data) {
+        const params = {
+            host: this.hostSpecial,
+            path: 'special_search',
+            method: 'GET',
+            referer: this.referer,
+            data
+        }
+        return super.platformRequest(params)
+    }
+    /**
+     * 根据关键字查询歌手
+     * @param {Object} data 
+     */
+    singersearch(data) {
+        const params = {
+            host: this.hostComplex,
+            path: 'get/complex',
+            method: 'GET',
+            referer: this.referer,
+            data,
+            protocol: 'http'
+        }
+        return super.platformRequest(params)
+    }
+    
 }
 
 module.exports = KuGouApi;

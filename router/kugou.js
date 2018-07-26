@@ -25,22 +25,58 @@ kugouRouter
             console.log(error);
         }
     })
-    .get('/searchDetail', async ctx => {
-        let word = (ctx.query && ctx.query.w) || '';
-        let d = {
-            keyword: word,
-            page: 2,
-            pagesize: 30,
+    // 搜索单曲
+    .get('/songsearch', async ctx => {
+        let value = ctx.query || {}
+        let default_value = {
+            keyword: '',
+            page: 1,
+            pagesize: 20,
             userid: -1,
         }
+        let d = Object.assign(default_value, value);
         let data;
         try {
-            data = await kugouApi.searchDetail(d);
+            data = await kugouApi.songsearch(d);
             ctx.response.body = data;
         } catch (error) {
             console.log(error);
         }
-        // keyword=1&page=1&pagesize=30&userid=-1&clientver=&platform=WebFilter&tag=em&filter=2&iscorrection=1&privilege_filter=0
+    })
+
+    // 搜索专辑
+    .get('/specialsearch', async ctx => {
+        let value = ctx.query || {};
+        let default_value = {
+            page: 1,
+            keyword: '',
+            pagesize: 20,
+            userid: -1,
+        }
+        let d = Object.assign(default_value, value);
+        let data;
+        try {
+            data = await kugouApi.specialsearch(d);
+            ctx.response.body = data;
+        } catch (error) {
+            console.log(error);
+        }
+    })
+
+    // 搜索歌手
+    .get('/singlesearch', async ctx => {
+        let value = ctx.query || {};
+        let default_value = {
+            word: '',
+        }
+        let d = Object.assign(default_value, value);
+        let data;
+        try {
+            data = await kugouApi.singersearch(d);
+            ctx.response.body = data;
+        } catch (error) {
+            console.log(error);
+        }
     })
 
 module.exports = kugouRouter;

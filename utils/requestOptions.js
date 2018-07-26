@@ -12,10 +12,10 @@ class CreateRequest {
      * 私有方法, 返回request options
      * @param {Integer} string 
      */
-    [generateOptions]({ host, path, method, referer, data }) {
+    [generateOptions]({ host, path, method, referer, data, protocol = 'https' }) {
         const options = {
             method,
-            url: `https://${host}/${path}`,
+            url: `${protocol}://${host}/${path}`,
             headers: {
                 "Accept": "*/*",
                 "Accept-Language": "zh-CN,zh;q=0.8,gl;q=0.6,zh-TW;q=0.4",
