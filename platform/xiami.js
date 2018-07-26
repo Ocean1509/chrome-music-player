@@ -1,16 +1,12 @@
 // 虾米音乐
-const querystring = require('querystring');
-const userAgent = require('../../utils/getUserAgent');
-
-const { xiamiHost } = require('../../utils/host');
+const { xiamiHost } = require('../utils/host');
 ;
-const CreateRequest = require('../../utils/requestOptions');
+const CreateRequest = require('../utils/requestOptions');
 
 
 const host = xiamiHost.host;
 const referer = xiamiHost.referer;
 
-const request = new CreateRequest();
 
 /**
  * 虾米音乐接口类

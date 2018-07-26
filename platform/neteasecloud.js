@@ -1,9 +1,9 @@
 // 网易云接口api
-const Crypto = require('../../utils/crypto');
+const Crypto = require('../utils/crypto');
 const querystring = require('querystring');
-const userAgent = require('../../utils/getUserAgent');
-const CreateRequest = require('../../utils/requestOptions');
-const { neteaseCloudHost } = require('../../utils/host');
+const userAgent = require('../utils/getUserAgent');
+const CreateRequest = require('../utils/requestOptions');
+const { neteaseCloudHost } = require('../utils/host');
 
 const host = neteaseCloudHost.host;
 const referer = neteaseCloudHost.referer;

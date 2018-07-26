@@ -1,22 +1,23 @@
 /**
  * 虾米接口路由
  */
-const XiaMiApi = require('../platform/XiamiMusic/api');
+const XiaMiApi = require('../platform/xiami.js');
 const Router = require('koa-router');
 const xiamiRouter = new Router();
 const xmApi = new XiaMiApi();
 
 xiamiRouter
     // 根据关键字搜索歌曲信息
-    .get('/search', async ctx => {
-        let word = (ctx.query && ctx.query.w) || '';
-        let d = {
+    .get('/suggestion', async ctx => {
+        let value = ctx.query || {};
+        let default_value = {
             v: '2.0',
             app_key: 1,
-            key: word,
+            key: '',
             limit: 5,
             r: 'search/songs'
-        };
+        }
+        let d = Object.assign(default_value, value);
         let data;
         try {
             data = await xmApi.searchSong(d);

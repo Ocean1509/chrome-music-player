@@ -1,5 +1,3 @@
-const BaiDuApi = require('../platform/BaiduMusic/api');
-const bdApi = new BaiDuApi;
 const Router = require('koa-router');
 const baiduRouter = require('./baidu');
 const doubanRouter = require('./douban');

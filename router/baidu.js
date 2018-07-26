@@ -1,21 +1,22 @@
 /**
  * 百度接口路由
  */
-const BaiDuApi = require('../platform/BaiduMusic/api');
+const BaiDuApi = require('../platform/baidu.js');
 const bdApi = new BaiDuApi;
 const Router = require('koa-router');
 const baiduRouter = new Router();
 
 baiduRouter
     // 根据关键字搜索歌曲信息
-    .get('/search', async ctx => {
-        let word = (ctx.query && ctx.query.w) || '';
-        let d = { from: 0, version: 2, third_type: 1, word, format: 'json', client_type: 0 };
+    .get('/suggestion', async ctx => {
+        let value = ctx.query || {};
+        let default_value = { from: 0, version: 2, third_type: 1, word: '', format: 'json', client_type: 0 };
+        let d = Object.assign(default_value, value);
         let data;
         try {
-            data = await bdApi.searchSong(d);
+            data = await bdApi.suggestionSong(d);
             let res;
-            if(data.errno) {
+            if (data.errno) {
                 res = [];
             } else {
                 res = data.data;

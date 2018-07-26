@@ -1,10 +1,10 @@
 // 豆瓣音乐
 const querystring = require('querystring');
-const userAgent = require('../../utils/getUserAgent');
+const userAgent = require('../utils/getUserAgent');
 
-const { doubanHost } = require('../../utils/host');
+const { doubanHost } = require('../utils/host');
 ;
-const CreateRequest = require('../../utils/requestOptions');
+const CreateRequest = require('../utils/requestOptions');
 
 
 const host = doubanHost.host;
@@ -41,7 +41,7 @@ class DouBanApi extends CreateRequest {
      * 根据关键字搜索歌曲信息
      * @param {Object} data 
      */
-    searchSong(data) {
+    suggestionSong(data) {
         const params = {
             host: this.host,
             path: 'v2/music/search',

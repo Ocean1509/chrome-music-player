@@ -1,10 +1,7 @@
 // 百度音乐
-const querystring = require('querystring');
-const userAgent = require('../../utils/getUserAgent');
-
-const { baiduHost } = require('../../utils/host');
+const { baiduHost } = require('../utils/host');
 ;
-const CreateRequest = require('../../utils/requestOptions');
+const CreateRequest = require('../utils/requestOptions');
 
 
 const host = baiduHost.host;
@@ -43,7 +40,7 @@ class BaiDuApi extends CreateRequest {
      * 根据关键字搜索歌曲信息
      * @param {Object} data 
      */
-    searchSong(data) {
+    suggestionSong(data) {
         const params = {
             host: this.host2,
             path: 'info/suggestion',

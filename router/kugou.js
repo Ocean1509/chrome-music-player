@@ -1,24 +1,25 @@
 /**
  * 酷狗接口路由
  */
-const KuGouApi = require('../platform/KugouMusic/api');
+const KuGouApi = require('../platform/kugou');
 const Router = require('koa-router');
 const kugouRouter = new Router();
 const kugouApi = new KuGouApi();
 
 kugouRouter
     // 根据关键字搜索歌曲信息
-    .get('/search', async ctx => {
-        let word = (ctx.query && ctx.query.w) || '';
-        let d = {
+    .get('/suggestion', async ctx => {
+        let value = ctx.query || {};
+        let default_value = {
             MusicTipCount: 5,
             MVTipCount: 2,
             albumcount: 2,
-            keyword: word
-        };
+            keyword: ''
+        }
+        let d = Object.assign(default_value, value);
         let data;
         try {
-            data = await kugouApi.searchSong(d);
+            data = await kugouApi.suggestionSong(d);
             ctx.response.body = data;
         } catch (error) {
             console.log(error);
