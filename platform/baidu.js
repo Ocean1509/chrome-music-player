@@ -6,6 +6,8 @@ const CreateRequest = require('../utils/requestOptions');
 
 const host = baiduHost.host;
 const host2 = baiduHost.host2;
+const hostTaihe = baiduHost['host-taihe'];
+
 const referer = baiduHost.referer;
 
 const request = new CreateRequest();
@@ -18,6 +20,7 @@ class BaiDuApi extends CreateRequest {
         super();
         this.host = host;
         this.host2 = host2;
+        this.hostTaihe = hostTaihe;
         this.referer = referer;
     }
 
@@ -33,7 +36,7 @@ class BaiDuApi extends CreateRequest {
             referer: this.referer,
             data
         }
-        return super.platformRequest(params)
+        return this.platformRequest(params)
     }
 
     /**
@@ -48,7 +51,37 @@ class BaiDuApi extends CreateRequest {
             referer: this.referer,
             data
         }
-        return super.platformRequest(params)
+        return this.platformRequest(params)
+    }
+
+    /**
+     * 根据关键字搜索歌曲
+     * @param {Object} data 
+     */
+    songsearch(data) {
+        const params = {
+            host: this.hostTaihe,
+            path: 'search/song',
+            method: 'GET',
+            referer: `http://${this.hostTaihe}/search/song?key=d`,
+            data
+        }
+        return this.platformRequest(params, true)
+    }
+
+    /**
+     * 根据关键字查询歌手
+     * @param {Object} data 
+     */
+    singersearch(data) {
+        const params = {
+            host: this.hostTaihe,
+            path: 'search/artist',
+            method: 'GET',
+            referer: `http://${this.hostTaihe}/search/song?key=d`,
+            data
+        }
+        return this.platformRequest(params, true)
     }
 }
 

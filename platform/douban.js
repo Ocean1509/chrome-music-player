@@ -50,7 +50,7 @@ class DouBanApi extends CreateRequest {
             data
         }
         console.log(params)
-        return super.platformRequest(params)
+        return this.platformRequest(params)
     }
 }
 

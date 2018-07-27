@@ -37,7 +37,7 @@ class KuGouApi extends CreateRequest {
             referer: this.referer,
             data
         }
-        return super.platformRequest(params)
+        return this.platformRequest(params)
     }
 
     /**
@@ -52,7 +52,7 @@ class KuGouApi extends CreateRequest {
             referer: this.referer,
             data
         }
-        return super.platformRequest(params)
+        return this.platformRequest(params)
     }
 
     /**
@@ -67,7 +67,7 @@ class KuGouApi extends CreateRequest {
             referer: this.referer,
             data
         }
-        return super.platformRequest(params)
+        return this.platformRequest(params)
     }
     /**
      * 根据关键字查询歌手
@@ -82,7 +82,7 @@ class KuGouApi extends CreateRequest {
             data,
             protocol: 'http'
         }
-        return super.platformRequest(params)
+        return this.platformRequest(params)
     }
     
 }

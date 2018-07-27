@@ -22,7 +22,7 @@ class NeteaseCloudApi extends CreateRequest {
      * 根据关键字搜索歌曲信息
      * @param {Object} data 
      */
-    searchSong(data) {
+    suggestionSong(data) {
         let d = Crypto(data);
         const params = {
             host: this.host,
@@ -31,7 +31,24 @@ class NeteaseCloudApi extends CreateRequest {
             referer: this.referer,
             data: d
         }
-        return super.platformRequest(params)
+        return this.platformRequest(params)
     }
+    
+    /**
+     * 根据关键字搜索歌曲
+     * @param {Object} data 
+     */
+    songsearch(data) {
+        let d = Crypto(data);
+        const params = {
+            host: this.host,
+            path: 'weapi/cloudsearch/get/web',
+            method: 'POST',
+            referer: this.referer,
+            data: d
+        }
+        return this.platformRequest(params)
+    }
+    
 }
 module.exports = NeteaseCloudApi;

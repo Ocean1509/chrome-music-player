@@ -7,6 +7,7 @@ const allHosts = {};
 allHosts.baiduHost = {
     host: 'play.baidu.com',
     host2: 'sug.qianqian.com',
+    'host-taihe': 'music.taihe.com',
     referer: 'http://music.baidu.com'
 }
 

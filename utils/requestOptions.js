@@ -32,16 +32,16 @@ class CreateRequest {
 
     /**
      * http 请求
-     * @param {*} params 
-     * @param {Promise} callback 
+     * @param {Object} params 
+     * @param {Boolean} isHtml 
      */
-    platformRequest(params) {
+    platformRequest(params, isHtml = false) {
         let options = this[generateOptions](params);
         return new Promise((resolve, reject) => {
             request(options, (err, response, body) => {
                 if (!err && response.statusCode === 200) {
                     try {
-                        resolve(JSON.parse(body));
+                        resolve(isHtml ? body : JSON.parse(body));
                     } catch (err) {
                         reject(err);
                     }

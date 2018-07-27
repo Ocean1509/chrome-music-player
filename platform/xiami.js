@@ -30,7 +30,7 @@ class XiaMiApi extends CreateRequest {
             referer: this.referer,
             data
         }
-        return super.platformRequest(params)
+        return this.platformRequest(params)
     }
 
     /**
@@ -45,7 +45,7 @@ class XiaMiApi extends CreateRequest {
             referer: this.referer,
             data
         }
-        return super.platformRequest(params)
+        return this.platformRequest(params)
     }
 }
 
