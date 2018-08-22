@@ -32,12 +32,6 @@ allHosts.kugouHost = {
     referer: ''
 }
 
-// 豆瓣音乐
-allHosts.doubanHost = {
-    host: 'api.douban.com',
-    referer: 'https://music.douban.com/'
-}
-
 // 网易云音乐
 allHosts.neteaseCloudHost = {
     host: 'music.163.com',

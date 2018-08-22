@@ -7,6 +7,7 @@ const bdApi = new BaiDuApi;
 const Router = require('koa-router');
 const baiduRouter = new Router();
 const queryString = require('querystring');
+const { baiduHost } = require('../utils/host');
 
 baiduRouter
     // 根据关键字搜索歌曲信息
@@ -88,9 +89,27 @@ baiduRouter
         let value = ctx.query || {};
         let default_value = { key: '', start: 0, size: 10 };
         let d = Object.assign(default_value, value);
+        let arr = []
+        let result = {}
         try {
             data = await bdApi.singersearch(d);
-            ctx.response.body = data;
+            if(!data) ctx.throw(400)
+            const $ = cheerio.load(data);
+            $('.bb').each((i, ele) => {
+                let obj = {}
+                let url = $(ele).find('.artist-info a').attr('href') || '';
+                url = (url && !url.startsWith('http')) ? 'http://' + baiduHost['host-taihe'] + url : url;
+                let artist_face = 'http://' + baiduHost['host-taihe'] + $(ele).find('.artist-face img').attr('src');
+                let artist_name = $(ele).find('.artist-info a').attr('title');
+                obj.url = url;
+                obj.artistface = artist_face;
+                obj.artistname = artist_name;
+                arr.push(obj)
+            })
+            result.data = arr;
+            result.page = (d.start / d.size) + 1;
+            result.size = d.size;
+            ctx.response.body = result;
         } catch (error) {
             console.log(error);
         }

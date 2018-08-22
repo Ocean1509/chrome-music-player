@@ -1,6 +1,5 @@
 const Router = require('koa-router');
 const baiduRouter = require('./baidu');
-const doubanRouter = require('./douban');
 const xiamiRouter = require('./xiami');
 const kugouRouter = require('./kugou');
 const qqRouter = require('./qq');
@@ -9,8 +8,6 @@ const neteaseCloudRouter = require('./neteasecloud');
 let router = new Router();
 
 router.use('/baidu', baiduRouter.routes(), baiduRouter.allowedMethods());
-
-router.use('/douban', doubanRouter.routes(), doubanRouter.allowedMethods());
 
 router.use('/xiami', xiamiRouter.routes(), xiamiRouter.allowedMethods());
 

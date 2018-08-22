@@ -12,7 +12,14 @@ class CreateRequest {
      * 私有方法, 返回request options
      * @param {Integer} string 
      */
-    [generateOptions]({ host, path, method, referer, data, protocol = 'https' }) {
+    [generateOptions]({
+        host,
+        path,
+        method,
+        referer,
+        data,
+        protocol = 'https'
+    }) {
         const options = {
             method,
             url: `${protocol}://${host}/${path}`,
@@ -23,7 +30,8 @@ class CreateRequest {
                 "Content-Type": "application/x-www-form-urlencoded",
                 "Host": host,
                 "Referer": referer,
-                "User-Agent": userAgent()
+                "User-Agent": userAgent(),
+                cookie: 'user_from=2;XMPLAYER_addSongsToggler=0;XMPLAYER_isOpen=0;_xiamitoken=cb8bfadfe130abdbf5e2282c30f0b39a;'
             }
         }
         options[method === 'GET' ? 'qs' : 'body'] = method === 'GET' ? data : querystring.stringify(data);
